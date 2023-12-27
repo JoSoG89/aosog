@@ -1,0 +1,27 @@
+version: '2.0'
+
+services:
+  chatgpt:
+    image: ghcr.io/ivanfioravanti/chatbot-ollama:main
+    ports:
+      - 3000:3000
+    environment:
+      - DEFAULT_MODEL=llama2
+      - OLLAMA_HOST=http://ollama:11434
+  ollama:
+    image: ollama/ollama:latest
+    volumes:
+      - ./ollama/models:/ollama/models
+    environment:
+      - OLLAMA_MODELS=/ollama/models
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: 1
+              capabilities: [gpu]
+
+
+# comando para descargar modelo:
+# docker-compose exec ollama ollama pull llama2
