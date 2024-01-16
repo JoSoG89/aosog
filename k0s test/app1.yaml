@@ -1,0 +1,21 @@
+apiVersion: V1
+
+kind: Pod
+
+metadata:
+  name: test1
+  labels:
+    app: web
+    area: test
+
+spec:
+  containers:
+    - name: webtest1
+      image: httpd
+      ports:
+        - containerPort: 80
+    
+    - name: ostest1
+      image: ubuntu
+      command: ["/bin/sh"]
+      args: [ "-c", "wile true; do echo hello; sleep 10; done" ]
