@@ -6,3 +6,6 @@ spec:
   containers:
   - name: test-container
     image: nginx
+    ports:
+    - containerPort: 80
+    - containerPort: 443
