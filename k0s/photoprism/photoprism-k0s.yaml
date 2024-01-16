@@ -116,5 +116,5 @@ spec:
         pathType: Prefix
   tls:
   - hosts:
-    - photoprism.my.domain
+    - photoprism.url
     secretName: photoprism-cert
