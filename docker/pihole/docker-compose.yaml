@@ -8,7 +8,7 @@ services:
     - "80:80/tcp"
     environment:
       TZ: 'America/Mazatlan'
-      WEBPASSWORD: 'Regin@070207'
+      WEBPASSWORD: 'PassWord'
     volumes:
       - './etc-pihole:/etc/pihole'
       - './etc-dnsmasq.d:/etc/dnsmasq.d'
