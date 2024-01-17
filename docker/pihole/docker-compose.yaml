@@ -8,16 +8,18 @@ services:
     - "80:80/tcp"
     environment:
       TZ: 'America/Mazatlan'
-      WEBPASSWORD: 'PassWord'
+      WEBPASSWORD: 'PassW0rd'
     volumes:
-      - '/home/pi/pihole/pihole:/etc/pihole'
-      - '/home/pi/pihole/dnsmasq.d:/etc/dnsmasq.d'
+      - pihole-data:/etc/pihole
+      - pihole-dns:/etc/dnsmasq.d
     deploy:
-      replicas: 2
+      replicas: 1
       update_config:
         parallelism: 2
       restart_policy:
         condition: on-failure
       placement:
         constraints: [node.role == manager]
-        
+volumes:
+  pihole-dns:
+  pihole-data:
