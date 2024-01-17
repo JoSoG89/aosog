@@ -10,8 +10,8 @@ services:
       TZ: 'America/Mazatlan'
       WEBPASSWORD: 'PassWord'
     volumes:
-      - './etc-pihole:/etc/pihole'
-      - './etc-dnsmasq.d:/etc/dnsmasq.d'
+      - '/home/pi/pihole/pihole:/etc/pihole'
+      - '/home/pi/pihole/dnsmasq.d:/etc/dnsmasq.d'
     deploy:
       replicas: 2
       update_config:
