@@ -1,0 +1,23 @@
+version: "3"
+services:
+  pihole:
+    image: pihole/pihole
+    ports:
+    - "53:53/tcp"
+    - "53:53/udp"
+    - "80:80/tcp"
+    environment:
+      TZ: 'America/Mazatlan'
+      WEBPASSWORD: 'Regin@070207'
+    volumes:
+      - './etc-pihole:/etc/pihole'
+      - './etc-dnsmasq.d:/etc/dnsmasq.d'
+    deploy:
+      replicas: 2
+      update_config:
+        parallelism: 2
+      restart_policy:
+        condition: on-failure
+      placement:
+        constraints: [node.role === manager]
+        
