@@ -19,5 +19,5 @@ services:
       restart_policy:
         condition: on-failure
       placement:
-        constraints: [node.role === manager]
+        constraints: [node.role == manager]
         
