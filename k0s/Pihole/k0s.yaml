@@ -1,0 +1,53 @@
+#### pihole in kubernetes
+apiVersion: V1
+metadata:
+  name: pihole
+  namespace: pihole
+spec:
+  hostNetwork: true
+  dnsPolicy: "none"
+  dnsConfig:
+    nameservers:
+      # upstream DNS used by pihole.
+      - 1.1.1.1
+  containers:
+    - name: pihole
+      image: pihole/pihole
+      imagePullPolicy: ifNotPresent
+      env:
+        - name: TZ
+          value: "America/Mazatlan"
+        - name: WEBPASSWORD
+          value: OsoriosAccess
+      securityContext:
+        privileged: true
+      ports:
+        - containerPort: 53
+          protocol: TCP
+        - containerPort: 53
+          protocol: UDP
+        - containerPort: 67
+          protocol: UDP
+        - containerPort: 80
+          protocol: TCP
+      volumeMounts:
+        - name: etc
+          mountPath: /etc/pihole
+        - name: dnsmasq
+          mountPath: /etc/dnsmasq.d
+      resources:
+        requests:
+          memory: 128Mi
+          cpu: 100m
+        limits:
+          memory: 2Gi
+          cpu: 1
+  volumes:
+    - name: etc
+      hostPath:
+        path: /data/pihole/etc
+        type: Directory
+    - name: dnsmasq
+      hostPath:
+        path: /data/pihole/dnsmasq.d
+        type: Directory
