@@ -18,7 +18,7 @@ spec:
         - name: TZ
           value: "America/Mazatlan"
         - name: WEBPASSWORD
-          value: OsoriosAccess
+          value: PassWord
       securityContext:
         privileged: true
       ports:
